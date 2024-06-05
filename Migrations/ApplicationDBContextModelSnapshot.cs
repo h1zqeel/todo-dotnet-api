@@ -50,13 +50,13 @@ namespace todo_api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "da83473d-feb0-4dc2-85b1-103f4769e818",
+                            Id = "c4b4bcf0-4ac3-4619-9d18-9b659225c082",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8bf21f6b-7b05-4f86-a2e2-c4ab13c8f31b",
+                            Id = "937c827d-1084-4e86-b2bf-7827fee9651a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -183,7 +183,13 @@ namespace todo_api.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(95)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Todos");
                 });
@@ -301,6 +307,22 @@ namespace todo_api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("todo_api.Models.Todo", b =>
+                {
+                    b.HasOne("todo_api.Models.User", "User")
+                        .WithMany("Todos")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("todo_api.Models.User", b =>
+                {
+                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }

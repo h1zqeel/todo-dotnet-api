@@ -5,10 +5,10 @@ namespace todo_api.Interfaces
 {
     public interface ITodoRepository
     {
-        Task<List<Todo>> GetAllAsync();
-        Task<Todo?> GetByIdAsync(int id);
+        Task<List<Todo>> GetAllAsync(string userId);
+        Task<Todo?> GetByIdAsync(int id, string userId);
         Task<Todo> CreateAsync(Todo todo);
-        Task<Todo?> UpdateAsync(int id, UpdateTodoRequestDto todoDto);
-        Task<Todo?> DeleteAsync(int id);
+        Task<Todo?> UpdateAsync(int id, string userId, UpdateTodoRequestDto todoDto);
+        Task<Todo?> DeleteAsync(int id, string userId);
     }
 }
