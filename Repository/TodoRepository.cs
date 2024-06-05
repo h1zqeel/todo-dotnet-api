@@ -22,10 +22,9 @@ namespace todo_api.Repository
             return todo;
         }
 
-        public async Task<Todo?> DeleteAsync(int id)
+        public async Task<Todo?> DeleteAsync(int id, string userId)
         {
-            var todo = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id);
-
+            var todo = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
             if(todo == null) {
                 return null;
             }
@@ -36,19 +35,19 @@ namespace todo_api.Repository
             return todo;
         }
 
-        public async Task<List<Todo>> GetAllAsync()
+        public async Task<List<Todo>> GetAllAsync(string userId)
         {
-            return await _context.Todos.ToListAsync();
+            return await _context.Todos.Where(x => x.UserId == userId).ToListAsync();
         }
 
-        public async Task<Todo?> GetByIdAsync(int id)
+        public async Task<Todo?> GetByIdAsync(int id, string userId)
         {
-            return await _context.Todos.FindAsync(id);
+            return await _context.Todos.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
 
-        public async Task<Todo?> UpdateAsync(int id, UpdateTodoRequestDto todoDto)
+        public async Task<Todo?> UpdateAsync(int id, string userId, UpdateTodoRequestDto todoDto)
         {
-            var existingTodo = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id);
+            var existingTodo = await _context.Todos.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if(existingTodo == null) {
                 return null;

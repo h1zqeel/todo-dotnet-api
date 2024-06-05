@@ -14,16 +14,18 @@ namespace todo_api.Mappers
             return new TodoDto
             {
                 Id = todoModel.Id,
-                Task = todoModel.Task
+                Task = todoModel.Task,
+                IsCompleted = todoModel.IsCompleted
             };
         }
 
-        public static Todo ToTodoModel(this CreateTodoRequestDto createTodoRequestDto)
+        public static Todo ToTodoModel(this CreateTodoRequestDto createTodoRequestDto, string userId)
         {
             return new Todo
             {
                 Task = createTodoRequestDto.Task,
-                IsCompleted = false
+                IsCompleted = false,
+                UserId = userId
             };
         }
     }
