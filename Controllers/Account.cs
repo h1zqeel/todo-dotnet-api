@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace todo_api.Controllers
 {
     [Route("api/account")]
     [ApiController]
+    [EnableCors("AllowSpecificOrigin")]
     public class Account : ControllerBase
     {
         private readonly UserManager<User> _userManager;
