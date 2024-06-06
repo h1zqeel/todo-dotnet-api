@@ -12,7 +12,7 @@ Additionally, remember to update the JWT signing key, issuer, and audience as ne
 
 ### Prerequisites
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8)
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ### Installation
 
